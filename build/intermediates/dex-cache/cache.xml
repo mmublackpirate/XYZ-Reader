@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2">
+
+  <item
+      jar="/home/yemyatthu/android-studio/gradle/wrapper/dists/gradle-2.4-all/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.1/86b122e640af09b0723e1fa44083c354ba6d9089/glide-3.6.1.jar"
+      jumboMode="false"
+      revision="23.0.0"
+      sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
+    <dex
+        dex="/home/yemyatthu/Downloads/xyzreader/xyzreader/XYZReader/build/intermediates/pre-dexed/debug/glide-3.6.1-fae9615aabbbea6c4c4e88b91b791a8eac9dd3ac.jar"/>
+  </item>
+
+</items>
