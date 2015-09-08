@@ -7,6 +7,7 @@ import android.content.Loader;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -106,6 +107,7 @@ public class ArticleDetailFragment extends Fragment
     title = getArguments().getString(ARG_ITEM_TITLE);
     collapsingToolbarLayout.setTitle(title);
     headerImage.setImageDrawable(getActivityCast().getResources().getDrawable(R.drawable.empty_detail));
+    fixApi21ToolBarBug(toolbar);
     bindViews();
     return mRootView;
   }
@@ -115,9 +117,8 @@ public class ArticleDetailFragment extends Fragment
     if (mRootView == null) {
       return;
     }
-
-    collapsingToolbarLayout.setContentScrimColor(getActivityCast().getResources()
-        .getColor(R.color.theme_primary));
+    collapsingToolbarLayout.setContentScrimColor(
+        getActivityCast().getResources().getColor(R.color.theme_primary));
     collapsingToolbarLayout.setStatusBarScrimColor(getActivityCast().getResources()
         .getColor(R.color.theme_primary_dark));
     if (mCursor != null) {
@@ -200,5 +201,17 @@ public class ArticleDetailFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
   }
+
+  //bug that puts toolbar out of screen
+  private void fixApi21ToolBarBug(Toolbar toolbar){
+    if(Build.VERSION.SDK_INT!=21) return; //only on api 21
+    final int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+    final int result = (resourceId > 0) ? getResources().getDimensionPixelSize(resourceId) : 0;
+    final CollapsingToolbarLayout.LayoutParams params =
+        (CollapsingToolbarLayout.LayoutParams)toolbar.getLayoutParams();
+    params.topMargin += result; //result is now added to the margin
+    toolbar.setLayoutParams(params);
+  }
+
 
 }
