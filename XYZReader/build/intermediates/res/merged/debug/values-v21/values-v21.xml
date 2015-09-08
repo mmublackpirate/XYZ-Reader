@@ -247,6 +247,6 @@
     <!-- From: file:/home/yemyatthu/Downloads/xyzreader/xyzreader/XYZReader/src/main/res/values-v21/styles.xml -->
     <eat-comment/>
     <style name="Theme.Bacon.Detail">
-    <item name="android:statusBarColor">@android:color/transparent</item>
-  </style>
+  <item name="android:statusBarColor">@android:color/transparent</item>
+</style>
 </resources>

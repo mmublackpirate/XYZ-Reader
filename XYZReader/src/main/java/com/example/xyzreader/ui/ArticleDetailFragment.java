@@ -105,17 +105,21 @@ public class ArticleDetailFragment extends Fragment
     bodyView = (TextView) mRootView.findViewById(R.id.article_body);
     title = getArguments().getString(ARG_ITEM_TITLE);
     collapsingToolbarLayout.setTitle(title);
-    //toolbar.setTitle(title);
-    //getActivityCast().getSupportActionBar().setTitle(title);
     headerImage.setImageDrawable(getActivityCast().getResources().getDrawable(R.drawable.empty_detail));
+    bindViews();
     return mRootView;
   }
 
   private void bindViews() {
+
     if (mRootView == null) {
       return;
     }
 
+    collapsingToolbarLayout.setContentScrimColor(getActivityCast().getResources()
+        .getColor(R.color.theme_primary));
+    collapsingToolbarLayout.setStatusBarScrimColor(getActivityCast().getResources()
+        .getColor(R.color.theme_primary_dark));
     if (mCursor != null) {
       collapsingToolbarLayout.setTitle(title);
       bylineView.setText(Html.fromHtml(
@@ -129,7 +133,6 @@ public class ArticleDetailFragment extends Fragment
           .getImageLoader()
           .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
             @Override public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-              Log.e("finally", "get a response hurray");
               final Bitmap bitmap = imageContainer.getBitmap();
               if (bitmap != null) {
                 headerImage.setImageBitmap(bitmap);
@@ -182,9 +185,7 @@ public class ArticleDetailFragment extends Fragment
       mCursor.close();
       mCursor = null;
     }
-    if (mCursor != null) {
-      bindViews();
-    }
+    bindViews();
   }
 
   @Override public void onLoaderReset(Loader<Cursor> cursorLoader) {
